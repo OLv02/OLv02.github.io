@@ -1,0 +1,168 @@
+---
+// src/layouts/Layout.astro
+
+// Import Tailwind + global base styles
+import '../styles/global.css';
+
+const {
+  title = "Your Name",
+  description = "Personal website",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+
+  <body class="min-h-screen bg-zinc-50 text-zinc-900 antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 rounded-md bg-white px-3 py-2 text-sm font-medium shadow ring-1 ring-zinc-200"
+    >
+      Skip to content
+    </a>
+
+    <div class="min-h-screen flex flex-col">
+      <nav class="border-b border-zinc-200 bg-zinc-50/80 backdrop-blur">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-14 items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+              <span
+                class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-50 text-sm font-semibold"
+                aria-hidden="true"
+              >
+                OL
+              </span>
+              <span class="text-sm font-semibold tracking-wide">{title}</span>
+            </a>
+
+            <div class="hidden sm:flex items-center gap-6 text-sm">
+              <a
+                href="/"
+                class="text-zinc-700 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+              >
+                Home
+              </a>
+              <a
+                href="/about"
+                class="text-zinc-700 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+              >
+                About
+              </a>
+              <a
+                href="/resume"
+                class="text-zinc-700 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+              >
+                Resume
+              </a>
+            </div>
+
+            <details class="sm:hidden relative">
+              <summary
+                class="list-none inline-flex items-center justify-center rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-800 shadow-sm hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+                aria-label="Open menu"
+              >
+                Menu
+              </summary>
+
+              <div
+                class="absolute right-0 mt-2 w-48 rounded-md border border-zinc-200 bg-white shadow-lg"
+                role="menu"
+              >
+                <div class="flex flex-col p-2 text-sm">
+                  <a
+                    href="/"
+                    class="rounded px-3 py-2 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                    role="menuitem"
+                  >
+                    Home
+                  </a>
+                  <a
+                    href="/about"
+                    class="rounded px-3 py-2 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                    role="menuitem"
+                  >
+                    About
+                  </a>
+                  <a
+                    href="/resume"
+                    class="rounded px-3 py-2 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                    role="menuitem"
+                  >
+                    Resume
+                  </a>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </nav>
+
+      <main id="main" class="flex-1">
+        <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+          <slot />
+        </div>
+      </main>
+
+      <footer class="border-t border-zinc-200 bg-zinc-50">
+        <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm text-zinc-600">
+              © {new Date().getFullYear()} {title}. All rights reserved.
+            </p>
+
+            <div class="flex items-center gap-3">
+              <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+                aria-label="GitHub"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.3-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.8-5.5 6.1.4.4.7 1 .7 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.67H9.34V9h3.41v1.56h.05c.47-.9 1.62-1.85 3.33-1.85 3.56 0 4.22 2.35 4.22 5.41v6.33ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="mailto:you@example.com"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
+                aria-label="Email"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
