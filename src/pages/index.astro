@@ -1,31 +1,28 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Welcome to my Website</h1>
-			<p>
-				My name is Owen, and I think learning is only complete when the lesson is shared. I hope this site helps me (and you) to "close the loop". In today's informational environment I don't think another website is the solution, but to build anything with anyone you need somewhere to point to and refer from.  
-			</p>
-			<p>Astro has given me a few ideas on how to get started with the template, which I hope to explore:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<h1>Welcome to my Website</h1>
+	<p>
+		My name is Owen, and I think learning is only complete when the lesson is shared. In today's information environment I don't think the world needs another blog, but I hope this will give me somewhere to point people if they want to know more about what I'm thinking.
+	</p>
+	<p>
+		A few things I'm thinking about right now:
+		<ul>
+			<li>Attention and prioritization in a world that's optimized for interruption.</li>
+			<li>The informational environment—how the Internet changed what we notice, how we decide, and what institutions can realistically do.</li>
+			<li>Local-first MVPs that can streamline the way we work </li>
+			<li>international institutions, international business, and geopolitics - more frameworks than hot takes.</li>
+		</ul>
+	</p>
+		Some long-running interests:
+		<ul>
+			<li>Dance (as practice, structure, and craft)</li>
+			<li>Architecture (especially soviet and other modernist forms)</li>
+			<li>Sharks</li>
+			<li>international institutions, international business, and geopolitics - more frameworks than hot takes.</li>
+		</ul>
+	</p>
+</Layout>

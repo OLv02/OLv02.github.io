@@ -1,0 +1,653 @@
+/* ============================================================================
+   RETRO THEME - 1990s Web Aesthetic
+   Scoped to html[data-theme="retro"]
+   ============================================================================ */
+
+/* ============================================================================
+   ROOT & PAGE FRAME
+   ============================================================================ */
+
+html[data-theme="retro"] {
+  /* Tiled background - classic 90s pattern */
+  background: #c0c0c0 url('/assets/retro/bg-tile.svg') repeat;
+  background-attachment: fixed;
+}
+
+html[data-theme="retro"] .site-shell {
+  /* Page frame - centered, fixed width, classic beige/off-white */
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fffef0;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-left: 2px solid #808080;
+  border-right: 2px solid #808080;
+
+  /* Serif typography - Times stack */
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #004d00; /* Dark green text */
+}
+
+/* Responsive width on smaller screens */
+@media (max-width: 760px) {
+  html[data-theme="retro"] .site-shell {
+    max-width: 100%;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* ============================================================================
+   HEADER BAND WITH GLOBES
+   ============================================================================ */
+
+html[data-theme="retro"] .site-header {
+  background: linear-gradient(to bottom, #000080 0%, #0000cd 100%);
+  border-bottom: 3px ridge #c0c0c0;
+  padding: 20px 10px 10px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Globe images - left and right */
+html[data-theme="retro"] .site-header::before,
+html[data-theme="retro"] .site-header::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: url('/assets/retro/globe.svg') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+html[data-theme="retro"] .site-header::before {
+  left: 10px;
+}
+
+html[data-theme="retro"] .site-header::after {
+  right: 10px;
+}
+
+/* Site title styling */
+html[data-theme="retro"] .site-header .site-title,
+html[data-theme="retro"] .site-header h2 a {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffff00;
+  text-shadow: 2px 2px 4px #000000;
+  text-decoration: none;
+  display: block;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+html[data-theme="retro"] .site-header h2 {
+  margin: 0;
+  font-size: 1em;
+}
+
+/* Under-title loading message */
+html[data-theme="retro"] .site-header::after {
+  /* Override globe for header-only message */
+}
+
+html[data-theme="retro"] .site-header nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Add loading message after title */
+html[data-theme="retro"] .site-header h2::after {
+  content: '(please wait 60 seconds for page to load)';
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+  color: #add8e6;
+  font-weight: normal;
+  margin-top: 5px;
+  letter-spacing: normal;
+}
+
+/* ============================================================================
+   PROGRESS LINE MOTIF
+   ============================================================================ */
+
+html[data-theme="retro"] .site-header nav::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffff00 0px,
+    #ffff00 10px,
+    #000080 10px,
+    #000080 20px
+  );
+  margin: 15px 0 10px;
+  position: relative;
+}
+
+/* Runner sprite centered on progress line */
+html[data-theme="retro"] .site-header nav::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: url('/assets/retro/runner.svg') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 95px; /* Adjust based on header height */
+}
+
+/* ============================================================================
+   NAVIGATION LINKS
+   ============================================================================ */
+
+html[data-theme="retro"] .site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 15px;
+  padding: 0;
+}
+
+html[data-theme="retro"] .site-nav a,
+html[data-theme="retro"] .site-nav .internal-links a {
+  display: inline-block;
+  padding: 5px 15px;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 2px;
+}
+
+html[data-theme="retro"] .site-nav a:hover {
+  background: #a9a9a9;
+  border-style: inset;
+}
+
+html[data-theme="retro"] .site-nav a:active {
+  border-style: inset;
+  background: #808080;
+}
+
+html[data-theme="retro"] .site-nav a.active {
+  background: #000080;
+  color: #ffff00;
+  border-color: #000080;
+}
+
+/* Hide social links in retro mode - too modern */
+html[data-theme="retro"] .social-links {
+  display: none;
+}
+
+/* ============================================================================
+   MAIN CONTENT AREA
+   ============================================================================ */
+
+html[data-theme="retro"] .site-main {
+  padding: 30px 20px;
+  background: #fffef0;
+}
+
+html[data-theme="retro"] .content-column {
+  max-width: 100%;
+}
+
+/* ============================================================================
+   TYPOGRAPHY - LINKS
+   ============================================================================ */
+
+html[data-theme="retro"] a {
+  color: #0000ff; /* Classic blue links */
+  text-decoration: underline;
+}
+
+html[data-theme="retro"] a:visited {
+  color: #800080; /* Purple visited links */
+}
+
+html[data-theme="retro"] a:hover {
+  color: #ff0000; /* Red hover state */
+  background-color: #ffff00; /* Yellow highlight */
+}
+
+html[data-theme="retro"] a:active {
+  color: #ff0000;
+}
+
+/* ============================================================================
+   TYPOGRAPHY - HEADINGS
+   ============================================================================ */
+
+html[data-theme="retro"] h1,
+html[data-theme="retro"] h2,
+html[data-theme="retro"] h3,
+html[data-theme="retro"] h4,
+html[data-theme="retro"] h5,
+html[data-theme="retro"] h6 {
+  font-family: "Times New Roman", Times, serif;
+  color: #004d00;
+  font-weight: bold;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid #808080;
+  padding-bottom: 3px;
+}
+
+html[data-theme="retro"] h1 {
+  font-size: 28px;
+  color: #000080;
+  text-align: center;
+  border-bottom: 3px double #808080;
+}
+
+html[data-theme="retro"] h2 {
+  font-size: 24px;
+}
+
+html[data-theme="retro"] h3 {
+  font-size: 20px;
+  border-bottom: 1px solid #808080;
+}
+
+html[data-theme="retro"] h4 {
+  font-size: 18px;
+  border-bottom: 1px dotted #808080;
+}
+
+html[data-theme="retro"] h5,
+html[data-theme="retro"] h6 {
+  font-size: 16px;
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   TYPOGRAPHY - PARAGRAPHS & TEXT
+   ============================================================================ */
+
+html[data-theme="retro"] p {
+  margin-bottom: 1em;
+  text-align: justify;
+  text-indent: 2em;
+}
+
+html[data-theme="retro"] .prose p:first-of-type {
+  text-indent: 0;
+  font-variant: small-caps;
+  font-size: 1.1em;
+}
+
+html[data-theme="retro"] strong,
+html[data-theme="retro"] b {
+  font-weight: bold;
+  color: #8b0000; /* Dark red for emphasis */
+}
+
+html[data-theme="retro"] em,
+html[data-theme="retro"] i {
+  font-style: italic;
+  color: #006400; /* Darker green for italic */
+}
+
+/* ============================================================================
+   LISTS
+   ============================================================================ */
+
+html[data-theme="retro"] ul,
+html[data-theme="retro"] ol {
+  margin: 1em 0;
+  padding-left: 40px;
+}
+
+html[data-theme="retro"] ul {
+  list-style-type: square;
+}
+
+html[data-theme="retro"] ol {
+  list-style-type: decimal;
+}
+
+html[data-theme="retro"] li {
+  margin-bottom: 0.5em;
+  color: #004d00;
+}
+
+/* ============================================================================
+   CODE & PREFORMATTED TEXT
+   ============================================================================ */
+
+html[data-theme="retro"] code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  background: #f0f0f0;
+  border: 1px inset #808080;
+  padding: 2px 4px;
+  color: #000080;
+}
+
+html[data-theme="retro"] pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  background: #000000;
+  color: #00ff00; /* Green terminal text */
+  border: 3px inset #808080;
+  padding: 15px;
+  overflow-x: auto;
+  margin: 1em 0;
+  line-height: 1.4;
+}
+
+html[data-theme="retro"] pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ============================================================================
+   BLOCKQUOTES
+   ============================================================================ */
+
+html[data-theme="retro"] blockquote {
+  border-left: 5px solid #808080;
+  background: #f5f5dc;
+  padding: 10px 20px;
+  margin: 1em 0;
+  font-style: italic;
+  position: relative;
+}
+
+html[data-theme="retro"] blockquote::before {
+  content: '\201C'; /* Opening quote */
+  font-size: 48px;
+  color: #808080;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  line-height: 1;
+}
+
+html[data-theme="retro"] blockquote p {
+  text-indent: 0;
+  margin-left: 30px;
+}
+
+/* ============================================================================
+   HORIZONTAL RULES
+   ============================================================================ */
+
+html[data-theme="retro"] hr {
+  border: none;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #808080 0px,
+    #808080 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  margin: 2em 0;
+}
+
+/* ============================================================================
+   IMAGES
+   ============================================================================ */
+
+html[data-theme="retro"] img {
+  max-width: 100%;
+  height: auto;
+  border: 3px outset #c0c0c0;
+  background: #ffffff;
+  padding: 5px;
+}
+
+html[data-theme="retro"] .fx-shadow-track img {
+  box-shadow: 5px 5px 0px #808080;
+}
+
+/* ============================================================================
+   TABLES
+   ============================================================================ */
+
+html[data-theme="retro"] table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 3px outset #c0c0c0;
+  margin: 1em 0;
+  background: #ffffff;
+}
+
+html[data-theme="retro"] th {
+  background: #000080;
+  color: #ffffff;
+  padding: 8px;
+  text-align: left;
+  border: 2px outset #c0c0c0;
+  font-weight: bold;
+}
+
+html[data-theme="retro"] td {
+  padding: 8px;
+  border: 1px solid #c0c0c0;
+}
+
+html[data-theme="retro"] tr:nth-child(even) {
+  background: #f0f0f0;
+}
+
+/* ============================================================================
+   BUTTONS & FORM ELEMENTS
+   ============================================================================ */
+
+html[data-theme="retro"] button,
+html[data-theme="retro"] input[type="button"],
+html[data-theme="retro"] input[type="submit"] {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+  padding: 6px 16px;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+html[data-theme="retro"] button:hover {
+  background: #a9a9a9;
+}
+
+html[data-theme="retro"] button:active {
+  border-style: inset;
+}
+
+html[data-theme="retro"] input[type="text"],
+html[data-theme="retro"] input[type="email"],
+html[data-theme="retro"] textarea {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  background: #ffffff;
+  border: 2px inset #808080;
+  padding: 4px;
+  color: #000000;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+html[data-theme="retro"] .site-footer {
+  background: linear-gradient(to bottom, #0000cd 0%, #000080 100%);
+  border-top: 3px ridge #c0c0c0;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+html[data-theme="retro"] .site-footer::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffff00 0px,
+    #ffff00 10px,
+    #000080 10px,
+    #000080 20px
+  );
+  margin-bottom: 15px;
+}
+
+html[data-theme="retro"] .site-footer a {
+  color: #ffff00;
+}
+
+html[data-theme="retro"] .site-footer a:visited {
+  color: #add8e6;
+}
+
+/* ============================================================================
+   BLOG POST SPECIFIC STYLING
+   ============================================================================ */
+
+html[data-theme="retro"] .post-article {
+  background: #ffffff;
+  border: 3px ridge #c0c0c0;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 5px 5px 0px #808080;
+}
+
+html[data-theme="retro"] .post-article .title {
+  text-align: center;
+  border-bottom: 3px double #808080;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+html[data-theme="retro"] .post-article .title h1 {
+  border-bottom: none;
+  margin: 0;
+}
+
+html[data-theme="retro"] .date {
+  font-size: 12px;
+  color: #808080;
+  font-style: italic;
+}
+
+html[data-theme="retro"] .hero-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ============================================================================
+   BLOG INDEX GRID
+   ============================================================================ */
+
+html[data-theme="retro"] .site-main ul {
+  list-style: none;
+  padding: 0;
+}
+
+html[data-theme="retro"] .site-main ul li {
+  background: #ffffff;
+  border: 3px outset #c0c0c0;
+  margin-bottom: 15px;
+  padding: 15px;
+  transition: all 0.2s;
+}
+
+html[data-theme="retro"] .site-main ul li:hover {
+  border-style: inset;
+  background: #f5f5dc;
+}
+
+html[data-theme="retro"] .site-main ul li a {
+  text-decoration: none;
+}
+
+html[data-theme="retro"] .site-main ul li .title {
+  color: #000080;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+html[data-theme="retro"] .site-main ul li a:hover .title {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 720px) {
+  html[data-theme="retro"] .site-header::before,
+  html[data-theme="retro"] .site-header::after {
+    width: 30px;
+    height: 30px;
+    left: 5px;
+  }
+
+  html[data-theme="retro"] .site-header::after {
+    right: 5px;
+  }
+
+  html[data-theme="retro"] .site-header .site-title,
+  html[data-theme="retro"] .site-header h2 a {
+    font-size: 24px;
+  }
+
+  html[data-theme="retro"] .site-main {
+    padding: 20px 10px;
+  }
+
+  html[data-theme="retro"] p {
+    text-indent: 0;
+  }
+}
+
+/* ============================================================================
+   UTILITY OVERRIDES
+   ============================================================================ */
+
+/* Ensure Tailwind utilities don't interfere in retro mode */
+html[data-theme="retro"] .min-h-screen {
+  min-height: 100vh;
+}
+
+html[data-theme="retro"] .sr-only {
+  /* Keep screen reader styles */
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

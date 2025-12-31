@@ -1,0 +1,20 @@
+---
+// ThemeScript.astro
+// Inline synchronous script to set theme before CSS loads
+// Prevents FOUC (Flash of Unstyled Content)
+---
+
+<script is:inline>
+  // Run immediately, before any rendering
+  // Using localStorage for persistence (simpler than cookies, no server needed)
+  (function() {
+    const STORAGE_KEY = 'site-theme';
+    const DEFAULT_THEME = 'modern';
+
+    // Read saved theme preference or use default
+    const savedTheme = localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME;
+
+    // Set data-theme attribute immediately
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  })();
+</script>

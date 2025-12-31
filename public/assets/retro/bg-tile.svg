@@ -1,0 +1,6 @@
+<svg width="4" height="4" xmlns="http://www.w3.org/2000/svg">
+  <!-- Classic 90s tiled background pattern - small repeating texture -->
+  <rect width="4" height="4" fill="#c0c0c0"/>
+  <rect x="0" y="0" width="2" height="2" fill="#d3d3d3"/>
+  <rect x="2" y="2" width="2" height="2" fill="#d3d3d3"/>
+</svg>

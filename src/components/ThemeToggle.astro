@@ -1,0 +1,113 @@
+---
+// ThemeToggle.astro
+// User-visible theme switcher with localStorage persistence
+---
+
+<div class="theme-toggle">
+  <button
+    id="theme-toggle-btn"
+    type="button"
+    aria-label="Toggle between modern and retro themes"
+    aria-live="polite"
+  >
+    <span class="theme-label" data-theme-modern>Modern</span>
+    <span class="theme-label" data-theme-retro>Retro</span>
+  </button>
+</div>
+
+<style>
+  .theme-toggle {
+    display: inline-block;
+  }
+
+  #theme-toggle-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .theme-label {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+  }
+
+  /* Modern theme styling */
+  html[data-theme="modern"] .theme-label[data-theme-modern] {
+    background: #2337ff;
+    color: white;
+    font-weight: bold;
+  }
+
+  html[data-theme="modern"] .theme-label[data-theme-retro] {
+    background: transparent;
+    color: #64748b;
+  }
+
+  html[data-theme="modern"] .theme-label[data-theme-retro]:hover {
+    color: #334155;
+  }
+
+  /* Retro theme styling */
+  html[data-theme="retro"] .theme-label[data-theme-retro] {
+    background: #ffff00;
+    color: #000080;
+    font-weight: bold;
+    border: 2px inset #dfdfdf;
+  }
+
+  html[data-theme="retro"] .theme-label[data-theme-modern] {
+    background: #c0c0c0;
+    color: #000000;
+    border: 2px outset #dfdfdf;
+  }
+
+  html[data-theme="retro"] .theme-label[data-theme-modern]:hover {
+    background: #a9a9a9;
+  }
+
+  #theme-toggle-btn:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  // Client-side theme toggle logic
+  const STORAGE_KEY = 'site-theme';
+  const button = document.getElementById('theme-toggle-btn');
+
+  if (button) {
+    button.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'modern';
+      const newTheme = currentTheme === 'modern' ? 'retro' : 'modern';
+
+      // Update DOM immediately
+      document.documentElement.setAttribute('data-theme', newTheme);
+
+      // Persist to localStorage
+      localStorage.setItem(STORAGE_KEY, newTheme);
+
+      // Update aria-label for screen readers
+      button.setAttribute(
+        'aria-label',
+        `Current theme: ${newTheme}. Click to switch to ${currentTheme}.`
+      );
+    });
+
+    // Set initial aria-label
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'modern';
+    const otherTheme = currentTheme === 'modern' ? 'retro' : 'modern';
+    button.setAttribute(
+      'aria-label',
+      `Current theme: ${currentTheme}. Click to switch to ${otherTheme}.`
+    );
+  }
+</script>
