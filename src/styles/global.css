@@ -1,9 +1,7 @@
 /* src/styles/global.css */
 
-/* Tailwind entrypoints */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 entrypoint */
+@import "tailwindcss";
 
 /* Retro theme - imported after Tailwind for proper scoping */
 @import './theme-retro.css';
@@ -60,5 +58,10 @@
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
     white-space: nowrap;
+  }
+
+  /* Hide retro logo in modern theme (default) */
+  .retro-logo-container {
+    display: none;
   }
 }

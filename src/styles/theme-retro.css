@@ -40,7 +40,7 @@ html[data-theme="retro"] .site-shell {
 }
 
 /* ============================================================================
-   HEADER BAND WITH GLOBES
+   HEADER BAND
    ============================================================================ */
 
 html[data-theme="retro"] .site-header {
@@ -52,29 +52,31 @@ html[data-theme="retro"] .site-header {
   margin-bottom: 0;
 }
 
-/* Globe images - left and right */
-html[data-theme="retro"] .site-header::before,
-html[data-theme="retro"] .site-header::after {
-  content: '';
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  background: url('/assets/retro/globe.svg') no-repeat center;
-  background-size: contain;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+/* Hide modern theme elements */
+html[data-theme="retro"] .modern-logo,
+html[data-theme="retro"] .modern-title {
+  display: none;
 }
 
-html[data-theme="retro"] .site-header::before {
-  left: 10px;
+/* Show and style retro logo */
+html[data-theme="retro"] .retro-logo-container {
+  display: block;
+  width: 240px;
+  height: 240px;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
-html[data-theme="retro"] .site-header::after {
-  right: 10px;
+html[data-theme="retro"] .retro-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  padding: 0;
 }
 
-/* Site title styling */
+/* Site title styling (for h2 text if present) */
 html[data-theme="retro"] .site-header .site-title,
 html[data-theme="retro"] .site-header h2 a {
   font-family: "Times New Roman", Times, serif;
@@ -91,11 +93,6 @@ html[data-theme="retro"] .site-header h2 a {
 html[data-theme="retro"] .site-header h2 {
   margin: 0;
   font-size: 1em;
-}
-
-/* Under-title loading message */
-html[data-theme="retro"] .site-header::after {
-  /* Override globe for header-only message */
 }
 
 html[data-theme="retro"] .site-header nav {
@@ -605,17 +602,6 @@ html[data-theme="retro"] .site-main ul li a:hover .title {
    ============================================================================ */
 
 @media (max-width: 720px) {
-  html[data-theme="retro"] .site-header::before,
-  html[data-theme="retro"] .site-header::after {
-    width: 30px;
-    height: 30px;
-    left: 5px;
-  }
-
-  html[data-theme="retro"] .site-header::after {
-    right: 5px;
-  }
-
   html[data-theme="retro"] .site-header .site-title,
   html[data-theme="retro"] .site-header h2 a {
     font-size: 24px;
