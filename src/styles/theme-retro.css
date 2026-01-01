@@ -9,9 +9,11 @@
 
 html[data-theme="retro"] {
   background-color: #ffffff;
-  background-image: url('/assets/retro/raindrop-bg-tile.png');
+  /* Tile source: /assets/retro/raindrop-bg-tile.jpg (rdrop used /agora/card-blue50l35.jpg). */
+  background-image: var(--retro-bg-image);
   background-repeat: repeat;
-  background-position: top left;
+  background-position: 0 0;
+  background-size: auto;
 }
 
 html[data-theme="retro"] body {
@@ -19,15 +21,18 @@ html[data-theme="retro"] body {
   color: #000000;
 }
 
-html[data-theme="retro"] .site-shell {
-  /* Page frame - centered, fixed width */
-  max-width: 760px;
-  margin: 0 auto;
-  background: #ffffff;
+html[data-theme="retro"] body.site-shell {
+  background-color: #ffffff !important;
+  background-image: var(--retro-bg-image) !important;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto;
   min-height: 100vh;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  border-left: 2px solid #808080;
-  border-right: 2px solid #808080;
+  max-width: none;
+  margin: 0;
+  width: 100%;
+  box-shadow: none;
+  border: none;
 
   font-family: Futura, Kudos, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -35,12 +40,24 @@ html[data-theme="retro"] .site-shell {
   color: #000000;
 }
 
+html[data-theme="retro"] .site-surface {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+html[data-theme="retro"] body.site-shell.site-surface {
+  background-color: #ffffff !important;
+  background-image: var(--retro-bg-image) !important;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto;
+}
+
 /* Responsive width on smaller screens */
 @media (max-width: 760px) {
-  html[data-theme="retro"] .site-shell {
+  html[data-theme="retro"] body.site-shell {
     max-width: 100%;
-    border-left: none;
-    border-right: none;
   }
 }
 
@@ -49,8 +66,9 @@ html[data-theme="retro"] .site-shell {
    ============================================================================ */
 
 html[data-theme="retro"] .site-header {
-  background: transparent;
+  background: transparent !important;
   border-bottom: none;
+  box-shadow: none !important;
   padding: 20px 10px 0;
   text-align: center;
   position: relative;
@@ -143,6 +161,7 @@ html[data-theme="retro"] .site-nav .internal-links a {
   padding: 0;
   background: none;
   border: none;
+  border-bottom: none;
   color: inherit;
   text-decoration: none;
   font-weight: 500;
@@ -162,6 +181,7 @@ html[data-theme="retro"] .site-nav a:active {
 html[data-theme="retro"] .site-nav a.active {
   font-weight: 700;
   text-decoration: underline;
+  border-bottom: none;
 }
 
 html[data-theme="retro"] .site-nav .nav-bracket {
@@ -187,6 +207,7 @@ html[data-theme="retro"] .site-nav #theme-toggle-btn {
   padding: 0;
   border: none;
   background: none;
+  box-shadow: none;
   font: inherit;
   color: inherit;
   gap: 6px;
@@ -204,6 +225,11 @@ html[data-theme="retro"] .site-nav .theme-label[data-theme-retro] {
   text-decoration: underline;
 }
 
+html[data-theme="retro"] .site-nav #theme-toggle-btn:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: 2px;
+}
+
 /* Hide social links in retro mode - too modern */
 html[data-theme="retro"] .social-links {
   display: none;
@@ -215,11 +241,13 @@ html[data-theme="retro"] .social-links {
 
 html[data-theme="retro"] .site-main {
   padding: 30px 20px;
-  background: transparent;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-html[data-theme="retro"] .content-column {
-  max-width: 100%;
+html[data-theme="retro"] main {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* ============================================================================
@@ -511,8 +539,9 @@ html[data-theme="retro"] textarea {
    ============================================================================ */
 
 html[data-theme="retro"] .site-footer {
-  background: transparent;
+  background: transparent !important;
   border-top: none;
+  box-shadow: none !important;
   padding: 20px;
   text-align: center;
   color: #000000;
@@ -531,13 +560,33 @@ html[data-theme="retro"] .site-footer .retro-footer-block {
   margin: 16px auto 0;
   max-width: 520px;
   width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 html[data-theme="retro"] .site-footer .retro-footer-divider {
   display: block;
   width: 100%;
-  max-width: 520px;
   height: auto;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+html[data-theme="retro"] .site-footer .retro-rainbow-divider {
+  display: block;
+  width: min(520px, 100%);
+  height: 12px;
+  margin: 0 auto;
+  object-fit: fill;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 html[data-theme="retro"] .site-footer .retro-footer-text {
@@ -550,11 +599,11 @@ html[data-theme="retro"] .site-footer .retro-footer-text {
    ============================================================================ */
 
 html[data-theme="retro"] .post-article {
-  background: #ffffff;
-  border: 3px ridge #c0c0c0;
+  background: transparent;
+  border: none;
   padding: 20px;
   margin: 20px 0;
-  box-shadow: 5px 5px 0px #808080;
+  box-shadow: none;
 }
 
 html[data-theme="retro"] .post-article .title {
@@ -590,7 +639,7 @@ html[data-theme="retro"] .site-main ul {
 }
 
 html[data-theme="retro"] .site-main ul li {
-  background: #ffffff;
+  background: transparent;
   border: 3px outset #c0c0c0;
   margin-bottom: 15px;
   padding: 15px;
@@ -599,7 +648,7 @@ html[data-theme="retro"] .site-main ul li {
 
 html[data-theme="retro"] .site-main ul li:hover {
   border-style: inset;
-  background: #f5f5dc;
+  background: transparent;
 }
 
 html[data-theme="retro"] .site-main ul li a {

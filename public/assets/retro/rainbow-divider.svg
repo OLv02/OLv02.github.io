@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 8" role="img" aria-hidden="true" preserveAspectRatio="none">
-  <rect width="600" height="8" fill="#ffffff" />
-  <rect x="0" y="0" width="600" height="1" fill="#ff0000" />
-  <rect x="0" y="1" width="600" height="1" fill="#ff7f00" />
-  <rect x="0" y="2" width="600" height="1" fill="#ffff00" />
-  <rect x="0" y="3" width="600" height="1" fill="#00ff00" />
-  <rect x="0" y="4" width="600" height="1" fill="#00ffff" />
-  <rect x="0" y="5" width="600" height="1" fill="#0000ff" />
-  <rect x="0" y="6" width="600" height="1" fill="#8b00ff" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 14" role="img" aria-hidden="true" preserveAspectRatio="none">
+  <rect x="0" y="0" width="600" height="2" fill="#ff0000" />
+  <rect x="0" y="2" width="600" height="2" fill="#ff7f00" />
+  <rect x="0" y="4" width="600" height="2" fill="#ffff00" />
+  <rect x="0" y="6" width="600" height="2" fill="#00ff00" />
+  <rect x="0" y="8" width="600" height="2" fill="#00ffff" />
+  <rect x="0" y="10" width="600" height="2" fill="#0000ff" />
+  <rect x="0" y="12" width="600" height="2" fill="#8b00ff" />
 </svg>
