@@ -4,6 +4,23 @@ const today = new Date();
 
 <footer class="site-footer">
 	&copy; {today.getFullYear()} Your name here. All rights reserved.
+	<div class="retro-footer-block" aria-hidden="true">
+		<img
+			class="retro-footer-divider"
+			src="/assets/retro/rainbow-divider.svg"
+			alt=""
+			loading="lazy"
+			decoding="async"
+		/>
+		<p class="retro-footer-text"><em>Visit my Other Profiles</em></p>
+		<img
+			class="retro-footer-divider"
+			src="/assets/retro/rainbow-divider.svg"
+			alt=""
+			loading="lazy"
+			decoding="async"
+		/>
+	</div>
 	<div class="social-links">
 		<a href="https://m.webtoo.ls/@astro" target="_blank">
 			<span class="sr-only">Follow Astro on Mastodon</span>
@@ -58,5 +75,8 @@ const today = new Date();
 	}
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
+	}
+	.retro-footer-block {
+		display: none;
 	}
 </style>

@@ -8,10 +8,12 @@ import ThemeToggle from './ThemeToggle.astro';
 	<nav>
 		<h2><a href="/" class="site-title">{SITE_TITLE}</a></h2>
 		<div class="site-nav internal-links">
+			<span class="nav-bracket nav-bracket-start" aria-hidden="true">[</span>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 			<ThemeToggle />
+			<span class="nav-bracket nav-bracket-end" aria-hidden="true">]</span>
 		</div>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -74,6 +76,9 @@ import ThemeToggle from './ThemeToggle.astro';
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+	.nav-bracket {
+		display: none;
 	}
 	.social-links,
 	.social-links a {

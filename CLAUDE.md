@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an Astro-based blog site with Tailwind CSS v4, configured for deployment to GitHub Pages. The site uses content collections for blog posts and supports both Markdown and MDX. The codebase is in transition, containing both the original Bear Blog-inspired styling (Header/Footer components) and a newer Tailwind-based Layout.astro system.
+This is an Astro-based blog site with Tailwind CSS v4, configured for deployment to GitHub Pages. The site uses content collections for blog posts (Markdown and MDX). The UI supports a modern theme (default) and a retro theme, switched via a client-side toggle that persists in localStorage.
 
 ## Development Commands
 
@@ -34,11 +34,11 @@ Blog posts are managed via Astro's content collections system:
 ### File-Based Routing
 
 Pages in `src/pages/` are automatically exposed as routes:
-- `src/pages/index.astro` → `/` (homepage with welcome message)
-- `src/pages/about.astro` → `/about` (uses BlogPost layout)
-- `src/pages/blog/index.astro` → `/blog` (blog listing page, sorted by pubDate desc)
-- `src/pages/blog/[...slug].astro` → `/blog/:slug` (dynamic blog post pages)
-- `src/pages/rss.xml.js` → `/rss.xml` (RSS feed endpoint)
+- `src/pages/index.astro` -> `/` (homepage)
+- `src/pages/about.astro` -> `/about`
+- `src/pages/blog/index.astro` -> `/blog` (blog listing page)
+- `src/pages/blog/[...slug].astro` -> `/blog/:slug` (dynamic blog post pages)
+- `src/pages/rss.xml.js` -> `/rss.xml` (RSS feed endpoint)
 
 ### Dynamic Route Generation
 
@@ -50,54 +50,56 @@ Blog posts use static path generation (`getStaticPaths`):
 
 ### Layouts
 
-**Two layout systems currently in use:**
+- **BaseLayout.astro** (`src/layouts/BaseLayout.astro`)
+  - Only place where the `<html>` tag is defined
+  - Imports `src/styles/global.css`
+  - Injects `ThemeScript` in `<head>` before other content
+  - Applies `class:list={["site-shell", bodyClass]}` to `<body>`
 
-1. **Layout.astro** (src/layouts/Layout.astro)
-   - Modern Tailwind-based layout
-   - Navigation: Home, About, Resume links
-   - Responsive mobile menu using `<details>` element
-   - Footer with social links (GitHub, LinkedIn, Email)
-   - Skip-to-content link for accessibility
-   - Logo uses "OL" initials in circular badge
-   - Currently used by: index page
+- **Layout.astro** (`src/layouts/Layout.astro`)
+  - Modern Tailwind-based layout
+  - Uses BaseLayout + BaseHead + Header + Footer
+  - Provides skip-to-content link and a centered content column
+  - Currently used by: `src/pages/index.astro`
 
-2. **BlogPost.astro** (src/layouts/BlogPost.astro)
-   - Original Bear Blog-inspired layout
-   - Uses Header, Footer, BaseHead components
-   - Renders hero image, title, dates, and content
-   - Scoped styles for blog post typography
-   - Currently used by: blog posts and about page
+- **BlogPost.astro** (`src/layouts/BlogPost.astro`)
+  - Uses BaseLayout + BaseHead + Header + Footer
+  - Renders hero image, title, dates, and slot content
+  - Currently used by: `src/pages/blog/[...slug].astro`, `src/pages/about.astro`
 
 ### Components
 
-- **BaseHead.astro** - SEO metadata component
-  - Handles Open Graph and Twitter cards
-  - Auto-generates canonical URLs
-  - Includes sitemap and RSS feed links
+- **BaseHead.astro** (`src/components/BaseHead.astro`)
+  - SEO metadata (Open Graph, Twitter cards, canonical URL)
+  - Links sitemap + RSS feed
   - Preloads Atkinson fonts
   - Fallback image: `src/assets/blog-placeholder-1.jpg`
-  - Imports `src/styles/global.css`
 
-- **Header.astro** - Original blog header
-  - Site title from `SITE_TITLE` constant
+- **Header.astro** (`src/components/Header.astro`)
+  - Site title from `SITE_TITLE`
   - Navigation: Home, Blog, About
   - Social links: Mastodon, Twitter, GitHub
-  - Active link styling via HeaderLink component
-  - Hides social links on mobile (<720px)
+  - Renders `ThemeToggle` inside the nav
 
-- **Footer.astro** - Original blog footer
-  - Copyright with dynamic year
-  - Same social links as Header
-  - Gradient background
+- **ThemeToggle.astro** (`src/components/ThemeToggle.astro`)
+  - Toggle button for modern/retro
+  - Uses localStorage key `site-theme` and updates `<html data-theme>`
+  - Inline styles for the toggle state
 
-- **HeaderLink.astro** - Navigation link with active state
-  - Auto-detects active page via `Astro.url.pathname`
-  - Handles BASE_URL for subpath deployments
-  - Adds underline + bold to active links
+- **ThemeScript.astro** (`src/components/ThemeScript.astro`)
+  - Inline script that runs before CSS to prevent FOUC
+  - Reads localStorage key `site-theme` and sets `<html data-theme>`
 
-- **FormattedDate.astro** - Date display component
-  - Formats dates as "MMM DD, YYYY" (e.g., "Aug 08, 2021")
-  - Uses semantic `<time>` element with ISO datetime
+- **Footer.astro** (`src/components/Footer.astro`)
+  - Dynamic year + social links
+
+- **HeaderLink.astro** (`src/components/HeaderLink.astro`)
+  - Active-state nav links (based on `Astro.url.pathname`)
+  - Handles `BASE_URL` for subpath deployments
+
+- **FormattedDate.astro** (`src/components/FormattedDate.astro`)
+  - Formats dates as "MMM DD, YYYY"
+  - Uses semantic `<time>` element
 
 ### Site Configuration
 
@@ -107,44 +109,70 @@ Blog posts use static path generation (`getStaticPaths`):
   - Used across pages for consistency
 
 - **astro.config.mjs** - Astro configuration
-  - `site: 'https://example.com'` - Update for production URLs
+  - `site: 'https://example.com'` (placeholder)
   - Integrations: `@astrojs/mdx`, `@astrojs/sitemap`
   - Tailwind via Vite plugin (`@tailwindcss/vite`)
 
+### Theme System (Modern/Retro)
+
+- **State + persistence**
+  - Default theme attribute: `<html data-theme="modern">` in `src/layouts/BaseLayout.astro`
+  - LocalStorage key: `site-theme`
+  - Stored values: `modern` or `retro`
+  - ThemeScript sets the attribute before CSS loads
+
+- **Toggle UI**
+  - Rendered in `src/components/Header.astro` via `ThemeToggle`
+  - Toggle updates `document.documentElement.dataset.theme` and localStorage
+  - Toggle updates `aria-label` for screen readers
+
+- **CSS scoping**
+  - `src/styles/global.css` imports Tailwind and then `src/styles/theme-retro.css`
+  - Retro styles are scoped to `html[data-theme="retro"]`
+  - Default (modern) styling relies on Tailwind utilities plus the base CSS
+
+### Retro Mode UI Specifics
+
+- **Header adjustments** (`src/styles/theme-retro.css`)
+  - `.site-header` becomes a centered, columnar layout with gradient background
+  - `h2::after` injects "(please wait 60 seconds for page to load)"
+  - `nav::before` draws a striped progress line
+  - `nav::after` places `/assets/retro/runner.svg` at `top: 95px`
+  - `.social-links` are hidden in retro mode
+
+- **Assets + sizing**
+  - Background tile: `/assets/retro/bg-tile.svg` (applied to `html[data-theme="retro"]`)
+  - Runner icon: `/assets/retro/runner.svg` (used in header `nav::after`)
+  - `public/assets/retro/globe.svg` exists but is not referenced in CSS
+  - Retro logo styles exist for `.retro-logo-container`/`.retro-logo` (240x240, `object-fit: cover`), but no markup uses those classes yet
+  - `public/images/site-logo.gif` is present but not referenced in markup (TODO if intended)
+
 ### Styling
 
-**Hybrid approach combining Tailwind and custom CSS:**
-
 - **Tailwind CSS v4** via `@tailwindcss/vite` plugin
-  - No separate config file needed
-  - Utility classes used in Layout.astro
+  - Utility classes used in `src/layouts/Layout.astro` and `src/pages/index.astro`
 
 - **Custom CSS** in `src/styles/global.css`
-  - Based on Bear Blog's default styles
   - Tailwind layers (`@layer base`)
-  - CSS custom properties for theming:
-    - `--accent: #2337ff`
-    - `--black`, `--gray`, `--gray-light`, `--gray-dark` (RGB values)
-    - `--box-shadow` and `--gray-gradient`
-  - Typography scale (h1: 3.052em down to h5: 1.25em)
-  - Responsive breakpoint: 720px
+  - CSS custom properties for theming (`--accent`, `--black`, `--gray`, `--box-shadow`, etc.)
   - Screen reader utility: `.sr-only`
+  - Hides `.retro-logo-container` by default (modern theme)
 
 - **Custom Font** - Atkinson Hyperlegible
   - Font files: `public/fonts/atkinson-{regular,bold}.woff`
-  - Preloaded in BaseHead for performance
+  - Preloaded in `src/components/BaseHead.astro`
   - Weights: 400 (regular), 700 (bold)
 
 ### Images and Assets
 
 - **Image handling** via `astro:assets`
   - Use `<Image>` component for optimized images
-  - Sharp integration for image processing
   - Blog placeholder images: `src/assets/blog-placeholder-{1-5}.jpg` + about variant
 
 - **Public assets** in `public/`
   - Favicon: `public/favicon.svg`
   - Fonts: `public/fonts/`
+  - Retro assets: `public/assets/retro/`
   - Served at root path (e.g., `/favicon.svg`)
 
 ### RSS Feed
@@ -167,7 +195,7 @@ Blog posts use static path generation (`getStaticPaths`):
 ### Adding Blog Posts
 
 1. Create `.md` or `.mdx` file in `src/content/blog/`
-2. Filename becomes the post slug (e.g., `my-post.md` → `/blog/my-post/`)
+2. Filename becomes the post slug (e.g., `my-post.md` -> `/blog/my-post/`)
 3. Required frontmatter:
    ```yaml
    ---
@@ -184,10 +212,13 @@ Blog posts use static path generation (`getStaticPaths`):
 ### Customizing Site Identity
 
 - Update site name/description in `src/consts.ts`
-- Update social links in Header.astro and Footer.astro (or Layout.astro)
-- Update logo initials in Layout.astro (currently "OL")
-- Update `site` URL in `astro.config.mjs` for production
-- Update email/social URLs in Layout.astro footer
+- Update social links in `src/components/Header.astro` and `src/components/Footer.astro`
+- Update `site` URL in `astro.config.mjs` for production URLs
+
+### Homepage Structure (Semantic + Tailwind)
+
+- `src/pages/index.astro` uses separate `<p>` and `<ul>` blocks (no lists nested inside paragraphs)
+- Tailwind utilities used for spacing and typography, e.g. `max-w-2xl`, `text-center`, `leading-relaxed`, `list-disc`, `pl-5`
 
 ## Deployment
 
@@ -205,9 +236,7 @@ Automatic deployment to GitHub Pages via `.github/workflows/deploy.yml`:
 - Includes `.astro/types.d.ts` for auto-generated content types
 - Excludes `dist/` directory
 
-## Known Architectural Notes
+## Troubleshooting
 
-- **Mixed layout approach**: The site currently uses two different layout paradigms. BlogPost.astro (with Header/Footer components) for blog content, and Layout.astro for other pages. Consider consolidating for consistency.
-- **Social links duplicated**: Header, Footer, and Layout all contain social link markup. Extract to a shared component if modifying links.
-- **Placeholder content**: Header/Footer link to Astro's official social accounts; Layout.astro has placeholder URLs (github.com/, linkedin.com/, you@example.com) that should be updated.
-- **Resume page referenced** but not implemented: Layout.astro nav includes `/resume` link with no corresponding page.
+- **No GitHub Pages deploy after push**: workflow only runs on `main` or via `workflow_dispatch` in `.github/workflows/deploy.yml`.
+- **Incorrect canonical/RSS/sitemap URLs**: `astro.config.mjs` still sets `site: 'https://example.com'` and should be updated for the actual Pages URL.
