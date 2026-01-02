@@ -80,11 +80,16 @@ Blog posts use static path generation (`getStaticPaths`):
   - Navigation: Home, Blog, About
   - Social links: Mastodon, Twitter, GitHub
   - Renders `ThemeToggle` inside the nav
+  - Renders two nav UIs:
+    - `.header-nav--modern` keeps the full modern nav row and ThemeToggle
+    - `.header-nav--retro` uses `<details>/<summary>` with a collapsible "Site Map" list (Home, Blog, About, plus explicit Modern/Retro theme buttons)
+  - Retro nav theme buttons use `data-theme-set="modern|retro"` attributes and are handled by the ThemeToggle script
 
 - **ThemeToggle.astro** (`src/components/ThemeToggle.astro`)
   - Toggle button for modern/retro
   - Uses localStorage key `site-theme` and updates `<html data-theme>`
   - Inline styles for the toggle state
+  - Also listens for `[data-theme-set]` clicks to explicitly set the theme (used by the retro Site Map list)
 
 - **ThemeScript.astro** (`src/components/ThemeScript.astro`)
   - Inline script that runs before CSS to prevent FOUC
@@ -139,6 +144,8 @@ Blog posts use static path generation (`getStaticPaths`):
   - `nav::before` draws a striped progress line
   - `nav::after` places `/assets/retro/runner.svg` at `top: 95px`
   - `.social-links` are hidden in retro mode
+  - `.header-nav--modern` is hidden and `.header-nav--retro` is shown only when `html[data-theme="retro"]`
+  - Retro Site Map styles live here (summary brackets, list separators, focus outlines)
 
 - **Assets + sizing**
   - Background tile: `/assets/retro/bg-tile.svg` (applied to `html[data-theme="retro"]`)

@@ -1,19 +1,35 @@
 ---
 // ThemeToggle.astro
 // User-visible theme switcher with localStorage persistence
+const { variant = 'default' } = Astro.props;
+const isLink = variant === 'link';
 ---
 
-<div class="theme-toggle">
-  <button
-    id="theme-toggle-btn"
-    type="button"
-    aria-label="Toggle between modern and retro themes"
-    aria-live="polite"
-  >
-    <span class="theme-label" data-theme-modern>Modern</span>
-    <span class="theme-label" data-theme-retro>Retro</span>
-  </button>
-</div>
+{
+  isLink ? (
+    <button
+      type="button"
+      class="theme-toggle__link retro-site-map__theme"
+      data-theme-toggle="link"
+      aria-label="Switch to Retro Mode."
+    >
+      Retro Mode
+    </button>
+  ) : (
+    <div class="theme-toggle">
+      <button
+        id="theme-toggle-btn"
+        type="button"
+        data-theme-toggle="button"
+        aria-label="Toggle between modern and retro themes"
+        aria-live="polite"
+      >
+        <span class="theme-label" data-theme-modern>Modern</span>
+        <span class="theme-label" data-theme-retro>Retro</span>
+      </button>
+    </div>
+  )
+}
 
 <style>
   .theme-toggle {
@@ -59,37 +75,95 @@
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
+
+  .theme-toggle__link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    color: inherit;
+  }
 </style>
 
 <script>
   // Client-side theme toggle logic
   const STORAGE_KEY = 'site-theme';
-  const button = document.getElementById('theme-toggle-btn');
+  const TOGGLE_SELECTOR = '[data-theme-toggle]';
+  const BOUND_ATTR = 'data-theme-toggle-bound';
 
-  if (button) {
-    button.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'modern';
-      const newTheme = currentTheme === 'modern' ? 'retro' : 'modern';
+  const getCurrentTheme = () =>
+    document.documentElement.getAttribute('data-theme') || 'modern';
 
-      // Update DOM immediately
-      document.documentElement.setAttribute('data-theme', newTheme);
-
-      // Persist to localStorage
-      localStorage.setItem(STORAGE_KEY, newTheme);
-
-      // Update aria-label for screen readers
-      button.setAttribute(
-        'aria-label',
-        `Current theme: ${newTheme}. Click to switch to ${currentTheme}.`
-      );
-    });
-
-    // Set initial aria-label
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'modern';
+  const updateToggleAria = (button, currentTheme) => {
     const otherTheme = currentTheme === 'modern' ? 'retro' : 'modern';
     button.setAttribute(
       'aria-label',
       `Current theme: ${currentTheme}. Click to switch to ${otherTheme}.`
     );
-  }
+  };
+
+  const updateSwitchLabel = (button, currentTheme) => {
+    const label = currentTheme === 'retro' ? 'Modern Mode' : 'Retro Mode';
+    button.textContent = label;
+    button.setAttribute('aria-label', `Switch to ${label}.`);
+  };
+
+  const updateAllToggles = (currentTheme = getCurrentTheme()) => {
+    document.querySelectorAll(TOGGLE_SELECTOR).forEach((toggle) => {
+      const kind = toggle.getAttribute('data-theme-toggle');
+      if (kind === 'link') {
+        updateSwitchLabel(toggle, currentTheme);
+      } else {
+        updateToggleAria(toggle, currentTheme);
+      }
+    });
+  };
+
+  const setTheme = (newTheme) => {
+    const currentTheme = getCurrentTheme();
+    if (newTheme !== currentTheme) {
+      // Update DOM immediately
+      document.documentElement.setAttribute('data-theme', newTheme);
+
+      // Persist to localStorage
+      localStorage.setItem(STORAGE_KEY, newTheme);
+    }
+
+    updateAllToggles(newTheme);
+  };
+
+  const handleToggleClick = () => {
+    const currentTheme = getCurrentTheme();
+    const newTheme = currentTheme === 'modern' ? 'retro' : 'modern';
+    setTheme(newTheme);
+  };
+
+  const initializeToggles = () => {
+    document.querySelectorAll(TOGGLE_SELECTOR).forEach((toggle) => {
+      if (toggle.hasAttribute(BOUND_ATTR)) return;
+      toggle.setAttribute(BOUND_ATTR, 'true');
+      toggle.addEventListener('click', handleToggleClick);
+    });
+
+    updateAllToggles();
+
+    if (!window.__themeToggleDocHandler) {
+      document.addEventListener('click', (event) => {
+        const target =
+          event.target instanceof Element
+            ? event.target.closest('[data-theme-set]')
+            : null;
+        if (!target) return;
+        event.preventDefault();
+        const theme = target.getAttribute('data-theme-set');
+        if (!theme) return;
+        setTheme(theme);
+      });
+      window.__themeToggleDocHandler = true;
+    }
+  };
+
+  initializeToggles();
 </script>

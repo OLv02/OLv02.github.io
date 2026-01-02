@@ -128,6 +128,8 @@ html[data-theme="retro"] .site-header h2 a {
 html[data-theme="retro"] .site-header h2 {
   margin: 0;
   font-size: 1em;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 html[data-theme="retro"] .site-header nav {
@@ -135,11 +137,13 @@ html[data-theme="retro"] .site-header nav {
   flex-direction: column;
   align-items: center;
   gap: 0;
+  border-top: none;
 }
 
 /* Add loading message after title */
 html[data-theme="retro"] .site-header h2::after {
-  content: none;
+  content: none !important;
+  display: none !important;
 }
 
 /* ============================================================================
@@ -148,12 +152,129 @@ html[data-theme="retro"] .site-header h2::after {
 
 html[data-theme="retro"] .site-header nav::before,
 html[data-theme="retro"] .site-header nav::after {
-  content: none;
+  content: none !important;
+  display: none !important;
 }
 
 /* ============================================================================
    NAVIGATION LINKS
    ============================================================================ */
+
+html[data-theme="retro"] .header-nav--modern {
+  display: none !important;
+}
+
+html[data-theme="retro"] .header-nav--retro {
+  display: block;
+  margin: 6px 0 0;
+  text-align: center;
+}
+
+html[data-theme="retro"] .header-nav--modern .site-nav {
+  border-top: none !important;
+}
+
+html[data-theme="retro"] .retro-site-map {
+  display: inline-block;
+}
+
+html[data-theme="retro"] .retro-site-map__summary {
+  list-style: none;
+  cursor: pointer;
+  color: #000000;
+  text-decoration: underline;
+  font-weight: 700;
+  padding: 4px 0;
+}
+
+html[data-theme="retro"] .retro-site-map__summary::marker {
+  content: '';
+}
+
+html[data-theme="retro"] .retro-site-map__summary::-webkit-details-marker {
+  display: none;
+}
+
+html[data-theme="retro"] .retro-site-map__summary:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: 2px;
+}
+
+html[data-theme="retro"] .retro-site-map__nav {
+  display: flex;
+  justify-content: center;
+}
+
+html[data-theme="retro"] .retro-site-map__list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 0;
+  text-align: center;
+}
+
+html[data-theme="retro"] .retro-site-map__list li {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+html[data-theme="retro"] .retro-site-map__list li + li {
+  border-top: none;
+}
+
+html[data-theme="retro"] .retro-site-map__list a {
+  display: inline-block;
+  padding: 0;
+  border-bottom: none;
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+html[data-theme="retro"] .retro-site-map__list.retro-sitemap-row a {
+  text-decoration: none;
+  border-bottom: 0;
+  background-image: none;
+}
+
+html[data-theme="retro"] .retro-site-map__list a.active {
+  font-weight: 700;
+}
+
+html[data-theme="retro"] .retro-site-map__list a:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: 2px;
+}
+
+html[data-theme="retro"] .retro-sep {
+  color: #000000;
+}
+
+html[data-theme="retro"] .retro-site-map__theme {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0000ff;
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+}
+
+html[data-theme="retro"] .retro-site-map__list.retro-sitemap-row .retro-site-map__theme {
+  padding-left: 0.5ch;
+  padding-right: 0.5ch;
+}
+
+html[data-theme="retro"] .retro-site-map__theme:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: 2px;
+}
 
 html[data-theme="retro"] .site-nav {
   display: inline-flex;
@@ -318,7 +439,7 @@ html[data-theme="retro"] h1 {
 }
 
 html[data-theme="retro"] .site-main h1 {
-  margin-top: 0.35em;
+  margin-top: 0px;
 }
 
 html[data-theme="retro"] h2 {

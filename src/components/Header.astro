@@ -25,13 +25,39 @@ import ThemeToggle from './ThemeToggle.astro';
 				<span class="sr-only">{SITE_TITLE}</span>
 			</a>
 		</h2>
-		<div class="site-nav internal-links">
-			<span class="nav-bracket nav-bracket-start" aria-hidden="true">[</span>
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<ThemeToggle />
-			<span class="nav-bracket nav-bracket-end" aria-hidden="true">]</span>
+		<div class="header-nav--modern">
+			<div class="site-nav internal-links">
+				<span class="nav-bracket nav-bracket-start" aria-hidden="true">[</span>
+				<HeaderLink href="/">Home</HeaderLink>
+				<HeaderLink href="/blog">Blog</HeaderLink>
+				<HeaderLink href="/about">About</HeaderLink>
+				<ThemeToggle />
+				<span class="nav-bracket nav-bracket-end" aria-hidden="true">]</span>
+			</div>
+		</div>
+		<div class="header-nav--retro">
+			<details class="retro-site-map" id="retro-site-map">
+				<summary class="retro-site-map__summary">[ Site Map ]</summary>
+				<nav class="retro-site-map__nav" aria-label="Site Map">
+					<ul class="retro-site-map__list retro-sitemap-row">
+						<li>
+							<HeaderLink href="/">Home</HeaderLink>
+							<span class="retro-sep" aria-hidden="true"> / </span>
+						</li>
+						<li>
+							<HeaderLink href="/blog">Blog</HeaderLink>
+							<span class="retro-sep" aria-hidden="true"> / </span>
+						</li>
+						<li>
+							<HeaderLink href="/about">About</HeaderLink>
+							<span class="retro-sep" aria-hidden="true"> / </span>
+						</li>
+						<li>
+							<ThemeToggle variant="link" />
+						</li>
+					</ul>
+				</nav>
+			</details>
 		</div>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -100,9 +126,29 @@ import ThemeToggle from './ThemeToggle.astro';
 	.social-links a {
 		display: flex;
 	}
+	.header-nav--retro {
+		display: none;
+	}
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
 		}
 	}
 </style>
+<script is:inline>
+	(() => {
+		const details = document.getElementById('retro-site-map');
+		if (!details) return;
+		const storageKey = 'retro-site-map-open';
+		if (sessionStorage.getItem(storageKey) === '1') {
+			details.open = true;
+		}
+		details.addEventListener('toggle', () => {
+			if (details.open) {
+				sessionStorage.setItem(storageKey, '1');
+			} else {
+				sessionStorage.removeItem(storageKey);
+			}
+		});
+	})();
+</script>
