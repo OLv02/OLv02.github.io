@@ -6,16 +6,25 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <header class="site-header">
 	<nav>
-		<h2 class="modern-title"><a href="/" class="site-title">{SITE_TITLE}</a></h2>
-		<HeaderLink href="/" class="retro-logo-container" aria-label="Astro Blog home">
-			<img
-				src={`${import.meta.env.BASE_URL}images/site-logo.gif`}
-				alt="Astro Blog logo"
-				class="retro-logo"
-				width="240"
-				height="240"
-			/>
-		</HeaderLink>
+		<h2 class="modern-title">
+			<a href={import.meta.env.BASE_URL} class="site-title site-logo-link">
+				<img
+					src={`${import.meta.env.BASE_URL}images/modern-site-logo.png`}
+					alt={`${SITE_TITLE} logo`}
+					class="site-logo site-logo--modern"
+					width="143"
+					height="144"
+				/>
+				<img
+					src={`${import.meta.env.BASE_URL}images/site-logo.gif`}
+					alt={`${SITE_TITLE} logo`}
+					class="site-logo site-logo--retro"
+					width="240"
+					height="240"
+				/>
+				<span class="sr-only">{SITE_TITLE}</span>
+			</a>
+		</h2>
 		<div class="site-nav internal-links">
 			<span class="nav-bracket nav-bracket-start" aria-hidden="true">[</span>
 			<HeaderLink href="/">Home</HeaderLink>
@@ -59,8 +68,6 @@ import ThemeToggle from './ThemeToggle.astro';
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
 	h2 {
 		margin: 0;

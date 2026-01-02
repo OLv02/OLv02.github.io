@@ -20,7 +20,9 @@ const today = new Date();
 			decoding="async"
 		/>
 	</div>
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
+	<p class="site-footer-copyright">
+		&copy; {today.getFullYear()} Your name here. All rights reserved.
+	</p>
 	<div class="social-links">
 		<a href="https://m.webtoo.ls/@astro" target="_blank">
 			<span class="sr-only">Follow Astro on Mastodon</span>
@@ -75,6 +77,9 @@ const today = new Date();
 	}
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
+	}
+	.site-footer-copyright {
+		margin: 0;
 	}
 	.retro-footer-block {
 		display: none;

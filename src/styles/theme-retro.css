@@ -75,14 +75,17 @@ html[data-theme="retro"] .site-header {
   margin-bottom: 0;
 }
 
-/* Hide modern theme elements */
-html[data-theme="retro"] .modern-logo,
-html[data-theme="retro"] .modern-title {
+/* Hide modern logo in retro mode */
+html[data-theme="retro"] .site-logo--modern {
   display: none;
 }
 
+html[data-theme="retro"] .site-logo--retro {
+  display: block;
+}
+
 /* Show and style retro logo */
-html[data-theme="retro"] .retro-logo-container {
+html[data-theme="retro"] .site-logo-link {
   display: block;
   width: 240px;
   height: 240px;
@@ -93,17 +96,18 @@ html[data-theme="retro"] .retro-logo-container {
   text-decoration: none;
 }
 
-html[data-theme="retro"] .retro-logo {
+html[data-theme="retro"] .site-logo--retro {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   border: none;
   padding: 0;
+  background: transparent;
 }
 
-html[data-theme="retro"] .site-header nav .retro-logo-container,
-html[data-theme="retro"] .site-header nav .retro-logo-container.active {
+html[data-theme="retro"] .site-header nav .site-logo-link,
+html[data-theme="retro"] .site-header nav .site-logo-link.active {
   border-bottom: none;
 }
 
@@ -586,8 +590,11 @@ html[data-theme="retro"] .site-footer {
   background: transparent !important;
   border-top: none;
   box-shadow: none !important;
-  padding: 20px;
+  padding: 0 20px 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #000000;
   font-size: 12px;
 }
@@ -601,13 +608,17 @@ html[data-theme="retro"] .site-footer .retro-footer-block {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin: 16px auto 0;
+  margin: 0 auto;
   max-width: 520px;
   width: 100%;
   padding: 0;
   background: transparent;
   border: none;
   box-shadow: none;
+}
+
+html[data-theme="retro"] .site-footer .site-footer-copyright {
+  margin: 1em 0 0;
 }
 
 html[data-theme="retro"] .site-footer .retro-footer-divider {
