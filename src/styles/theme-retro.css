@@ -88,6 +88,9 @@ html[data-theme="retro"] .retro-logo-container {
   height: 240px;
   overflow: hidden;
   margin: 0 auto;
+  padding: 0;
+  border: none;
+  text-decoration: none;
 }
 
 html[data-theme="retro"] .retro-logo {
@@ -97,6 +100,11 @@ html[data-theme="retro"] .retro-logo {
   object-position: center;
   border: none;
   padding: 0;
+}
+
+html[data-theme="retro"] .site-header nav .retro-logo-container,
+html[data-theme="retro"] .site-header nav .retro-logo-container.active {
+  border-bottom: none;
 }
 
 /* Site title styling (for h2 text if present) */
@@ -240,7 +248,7 @@ html[data-theme="retro"] .social-links {
    ============================================================================ */
 
 html[data-theme="retro"] .site-main {
-  padding: 30px 20px;
+  padding: 16px 20px 30px;
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -248,6 +256,10 @@ html[data-theme="retro"] .site-main {
 html[data-theme="retro"] main {
   background: transparent !important;
   box-shadow: none !important;
+}
+
+html[data-theme="retro"] .content-column {
+  padding-top: 8px;
 }
 
 /* ============================================================================
@@ -299,6 +311,10 @@ html[data-theme="retro"] h1 {
   font-size: 28px;
   text-align: center;
   border-bottom: 2px solid #000000;
+}
+
+html[data-theme="retro"] .site-main h1 {
+  margin-top: 0.35em;
 }
 
 html[data-theme="retro"] h2 {
@@ -370,6 +386,30 @@ html[data-theme="retro"] ol {
 
 html[data-theme="retro"] li {
   margin-bottom: 0.5em;
+  color: inherit;
+}
+
+html[data-theme="retro"] ul.home-bullets {
+  list-style: none;
+  margin: 0 0 0 1.5rem;
+  padding-left: 0;
+}
+
+html[data-theme="retro"] ul.home-bullets > li {
+  border: 0;
+  background: transparent;
+  position: relative;
+  padding-left: 1.25rem;
+  margin: 0;
+  text-indent: 0;
+}
+
+html[data-theme="retro"] ul.home-bullets > li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  line-height: 1;
   color: inherit;
 }
 
@@ -633,12 +673,12 @@ html[data-theme="retro"] .hero-image {
    BLOG INDEX GRID
    ============================================================================ */
 
-html[data-theme="retro"] .site-main ul {
+html[data-theme="retro"] .site-main .post-grid {
   list-style: none;
   padding: 0;
 }
 
-html[data-theme="retro"] .site-main ul li {
+html[data-theme="retro"] .site-main .post-grid li {
   background: transparent;
   border: 3px outset #c0c0c0;
   margin-bottom: 15px;
@@ -646,23 +686,23 @@ html[data-theme="retro"] .site-main ul li {
   transition: all 0.2s;
 }
 
-html[data-theme="retro"] .site-main ul li:hover {
+html[data-theme="retro"] .site-main .post-grid li:hover {
   border-style: inset;
   background: transparent;
 }
 
-html[data-theme="retro"] .site-main ul li a {
+html[data-theme="retro"] .site-main .post-grid li a {
   text-decoration: none;
 }
 
-html[data-theme="retro"] .site-main ul li .title {
+html[data-theme="retro"] .site-main .post-grid li .title {
   color: #000080;
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 5px;
 }
 
-html[data-theme="retro"] .site-main ul li a:hover .title {
+html[data-theme="retro"] .site-main .post-grid li a:hover .title {
   text-decoration: underline;
 }
 

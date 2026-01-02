@@ -90,7 +90,7 @@ const posts = (await getCollection('blog')).sort(
 	<Header />
 	<main class="site-main">
 		<section class="content-column">
-			<ul>
+			<ul class="post-grid">
 				{
 					posts.map((post) => (
 						<li>
