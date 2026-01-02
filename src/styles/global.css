@@ -228,6 +228,13 @@
     text-decoration: none;
   }
 
+  html[data-theme="modern"] .header-nav--modern .site-logo-link,
+  html[data-theme="modern"] .header-nav--modern .site-logo-link.active {
+    border-bottom: none;
+    text-decoration: none;
+    background-image: none;
+  }
+
   html[data-theme="modern"] .site-header {
     background: white;
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
