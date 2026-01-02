@@ -11,9 +11,9 @@ const isLink = variant === 'link';
       type="button"
       class="theme-toggle__link retro-site-map__theme"
       data-theme-toggle="link"
-      aria-label="Switch to Retro Mode."
+      aria-label="Switch to Retro Theme."
     >
-      Retro Mode
+      Retro Theme
     </button>
   ) : (
     <div class="theme-toggle">
@@ -105,7 +105,7 @@ const isLink = variant === 'link';
   };
 
   const updateSwitchLabel = (button, currentTheme) => {
-    const label = currentTheme === 'retro' ? 'Modern Mode' : 'Retro Mode';
+    const label = currentTheme === 'retro' ? 'Modern Theme' : 'Retro Theme';
     button.textContent = label;
     button.setAttribute('aria-label', `Switch to ${label}.`);
   };

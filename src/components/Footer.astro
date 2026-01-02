@@ -6,7 +6,7 @@ const today = new Date();
 	<div class="retro-footer-block" aria-hidden="true">
 		<img
 			class="retro-footer-divider retro-rainbow-divider"
-			src={`${import.meta.env.BASE_URL}assets/retro/rainbow-divider.svg`}
+			src={`${import.meta.env.BASE_URL}assets/retro/rainbow.gif`}
 			alt=""
 			loading="lazy"
 			decoding="async"
@@ -14,13 +14,16 @@ const today = new Date();
 		<p class="retro-footer-text"><em>Visit my Other Profiles</em></p>
 		<img
 			class="retro-footer-divider retro-rainbow-divider"
-			src={`${import.meta.env.BASE_URL}assets/retro/rainbow-divider.svg`}
+			src={`${import.meta.env.BASE_URL}assets/retro/rainbow.gif`}
 			alt=""
 			loading="lazy"
 			decoding="async"
 		/>
 	</div>
-	<p class="site-footer-copyright">
+	<span class="site-footer-copyright site-footer-copyright--modern">
+		&copy; {today.getFullYear()} OLco. All rights reserved.
+	</span>
+	<p class="site-footer-copyright site-footer-copyright--retro">
 		&copy; {today.getFullYear()} OLco. All rights reserved.
 	</p>
 	<div class="social-links">

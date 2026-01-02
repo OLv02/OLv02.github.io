@@ -756,7 +756,7 @@ html[data-theme="retro"] .site-footer .retro-footer-divider {
 html[data-theme="retro"] .site-footer .retro-rainbow-divider {
   display: block;
   width: min(520px, 100%);
-  height: 12px;
+  height: 5px;
   margin: 0 auto;
   object-fit: fill;
   border: 0;
