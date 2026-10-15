@@ -114,7 +114,7 @@ Blog posts use static path generation (`getStaticPaths`):
   - Used across pages for consistency
 
 - **astro.config.mjs** - Astro configuration
-  - `site: 'https://example.com'` (placeholder)
+  - `site: 'https://olv02.github.io'` (the GitHub Pages URL; RSS, sitemap and canonical links are built from it)
   - Integrations: `@astrojs/mdx`, `@astrojs/sitemap`
   - Tailwind via Vite plugin (`@tailwindcss/vite`)
 
@@ -246,4 +246,4 @@ Automatic deployment to GitHub Pages via `.github/workflows/deploy.yml`:
 ## Troubleshooting
 
 - **No GitHub Pages deploy after push**: workflow only runs on `main` or via `workflow_dispatch` in `.github/workflows/deploy.yml`.
-- **Incorrect canonical/RSS/sitemap URLs**: `astro.config.mjs` still sets `site: 'https://example.com'` and should be updated for the actual Pages URL.
+- **Incorrect canonical/RSS/sitemap URLs**: they come from `site` in `astro.config.mjs` (`https://olv02.github.io`); update it if the site moves to another domain.
